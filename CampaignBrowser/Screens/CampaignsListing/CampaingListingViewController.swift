@@ -19,6 +19,7 @@ class CampaignListingViewController: UIViewController {
         super.viewDidLoad()
 
         assert(typedView != nil)
+        defineCustomFlowLayout()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -39,5 +40,18 @@ class CampaignListingViewController: UIViewController {
                 })
             })
             .disposed(by: disposeBag)
+    }
+    
+    /**
+        Defining a Custom Flow Layout for the campaign collectionView
+     */
+    private func defineCustomFlowLayout(){
+        if let customFlowLayout = typedView.collectionViewLayout as? UICollectionViewFlowLayout {
+            customFlowLayout.estimatedItemSize = CGSize(width: typedView.frame.width, height: 338)
+            customFlowLayout.minimumInteritemSpacing = 10
+            customFlowLayout.minimumLineSpacing = 10
+            typedView.collectionViewLayout = customFlowLayout
+            typedView.contentInsetAdjustmentBehavior = .always
+        }
     }
 }
